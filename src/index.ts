@@ -8,6 +8,9 @@ const schema = new GraphQLSchema({
 })
 
 const app = express()
+app.get('/', (req, res) => {
+  return res.send('ジョジョの奇妙な冒険 名言API')
+})
 app.use(
   '/graphql',
   graphqlHTTP({
