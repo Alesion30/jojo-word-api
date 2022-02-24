@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(bodyParser.text({ type: 'application/graphql' }))
-
+app.use(bodyParser.json())
 const schema = new GraphQLSchema({
   query: queryType,
 })
