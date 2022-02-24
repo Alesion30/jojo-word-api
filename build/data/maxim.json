@@ -27,7 +27,12 @@
     {
         "speaker": "dio",
         "part": 3,
-        "message": "歩道が広いではないか…行け 関係ない 行け"
+        "message": "歩道が広いではないか…行け"
+    },
+    {
+        "speaker": "dio",
+        "part": 3,
+        "message": "関係ない 行け"
     },
     {
         "speaker": "dio",
