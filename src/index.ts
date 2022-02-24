@@ -2,11 +2,14 @@ import express from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import { GraphQLSchema } from 'graphql'
 import { queryType } from './fields'
+import bodyParser from 'body-parser'
 
 const app = express()
 app.get('/', (req, res) => {
-  return res.send('ジョジョの奇妙な冒険 名言API')
+    return res.send('ジョジョの奇妙な冒険 名言API')
 })
+
+app.use(bodyParser.text({ type: 'application/graphql' }))
 
 const schema = new GraphQLSchema({
   query: queryType,
