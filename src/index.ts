@@ -3,13 +3,13 @@ import { graphqlHTTP } from 'express-graphql'
 import { GraphQLSchema } from 'graphql'
 import { queryType } from './fields'
 
-const schema = new GraphQLSchema({
-  query: queryType,
-})
-
 const app = express()
 app.get('/', (req, res) => {
   return res.send('ジョジョの奇妙な冒険 名言API')
+})
+
+const schema = new GraphQLSchema({
+  query: queryType,
 })
 app.use(
   '/graphql',
@@ -18,6 +18,20 @@ app.use(
     graphiql: true,
   })
 )
+
+const log = (req: any, res: any, next: any) => {
+  const json = {
+    date: new Date(),
+    method: req.method,
+    path: req.path,
+    ip: req.ip,
+    proxyIP: req.ips,
+    userAgent: req.headers['user-agent'],
+  }
+  console.log(json)
+  next()
+}
+app.use(log)
 
 const port = process.env.PORT || 4000
 app.listen(port, () =>
