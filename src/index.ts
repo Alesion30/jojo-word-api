@@ -1,22 +1,17 @@
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql'
-import { buildSchema } from 'graphql'
+import { GraphQLSchema } from 'graphql'
+import { queryType } from './fields'
 
-const schema = buildSchema(`
- type Query {
- message: String
- }
-`)
-const root = {
-  message: () => 'Hello World!',
-}
+const schema = new GraphQLSchema({
+  query: queryType,
+})
 
 const app = express()
 app.use(
   '/graphql',
   graphqlHTTP({
     schema: schema,
-    rootValue: root,
     graphiql: true,
   })
 )
