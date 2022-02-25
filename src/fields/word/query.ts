@@ -15,7 +15,7 @@ type Arg = SearchCondition
 /** 引数 */
 const args: { [key in keyof Arg]: GraphQLArgumentConfig } = {
   part: { type: GraphQLString }, // 部数
-  speaker: { type: GraphQLString }, // 話し手
+  name: { type: GraphQLString }, // 名前
   min: { type: GraphQLInt }, // 最小文字数
   max: { type: GraphQLInt }, // 最大文字数
 }

@@ -4,7 +4,7 @@ import { getRandom } from '../../functions/getRandom'
 /** 検索条件 */
 export type SearchCondition = {
   part: string
-  speaker: string
+  name: string
   min: number
   max: number
 }
@@ -20,8 +20,12 @@ export const getWordList = (args: Partial<SearchCondition>) => {
     words = words.filter((v) => v.part === args.part)
   }
   // 名前検索
-  if (args.speaker) {
-    words = words.filter((v) => v.speaker.indexOf(args.speaker!) !== -1)
+  if (args.name) {
+    words = words.filter(
+      (v) =>
+        v.speaker.indexOf(args.name!) !== -1 ||
+        v.speaker_en.indexOf(args.name!) !== -1
+    )
   }
   // 文字数検索
   if (args.min) {
