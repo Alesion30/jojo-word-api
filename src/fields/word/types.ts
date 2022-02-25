@@ -15,6 +15,11 @@ export const wordType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'speaker en',
     },
+    // スタンド名
+    stand: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'stand',
+    },
     // 第何部
     part: {
       type: new GraphQLNonNull(GraphQLString),

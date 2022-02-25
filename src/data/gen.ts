@@ -11,6 +11,7 @@ type MessageJson = {
 type ParamsJson = {
   speaker: string
   speaker_en: string
+  stand: string | null
 }
 
 /** WordデータJSON 型 */
@@ -19,6 +20,7 @@ type WordJson = {
   part: string
   speaker: string
   speaker_en: string
+  stand: string | null
 }[]
 
 /** ルート ディレクトリ */
