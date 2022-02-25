@@ -5,7 +5,11 @@ import {
   ThunkObjMap,
   GraphQLArgumentConfig,
 } from 'graphql'
-import { SearchCondition, getCharacterList, getRandomCharacter } from './resolvers'
+import {
+  SearchCondition,
+  getCharacterList,
+  getRandomCharacter,
+} from './resolvers'
 import { characterType } from './types'
 
 /** 引数型 */
@@ -30,6 +34,7 @@ export const characterQuery: ThunkObjMap<GraphQLFieldConfig<any, any>> = {
     type: characterType,
     args,
     description: 'Get random character data.',
-    resolve: (value, args: Partial<SearchCondition>) => getRandomCharacter(args),
+    resolve: (value, args: Partial<SearchCondition>) =>
+      getRandomCharacter(args),
   },
 }

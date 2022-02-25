@@ -55,6 +55,10 @@ const characterOutputJson: CharacterJson = []
 folders.forEach((folder) => {
   const files = readdirSync(`${rootDir}/${folder}`)
   const params: ParamsJson = require(`./${folder}/_params.json`)
+
+  /** キャラの名言データ */
+  const charaWords: WordJson = []
+
   files
     .filter((v) => v.indexOf('_') !== 0)
     .forEach((file) => {
@@ -71,21 +75,23 @@ folders.forEach((folder) => {
         ...params,
       }))
 
-      /** キャラクターデータ */
-      const character: Character = {
-        name: params.speaker,
-        name_en: params.speaker_en,
-        stand: params.stand,
-        wordCount: words.length,
-        words,
-      }
-
       // 出力データに追加
       words.forEach((word) => {
+        charaWords.push(word)
         wordOutputJson.push(word)
       })
-      characterOutputJson.push(character)
     })
+
+  /** キャラクターデータ */
+  const character: Character = {
+    name: params.speaker,
+    name_en: params.speaker_en,
+    stand: params.stand,
+    wordCount: charaWords.length,
+    words: charaWords,
+  }
+
+  characterOutputJson.push(character)
 })
 
 writeFileSync(`${rootDir}/word.json`, JSON.stringify(wordOutputJson))

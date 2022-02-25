@@ -1,4 +1,10 @@
-import { GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLInt, GraphQLList } from 'graphql'
+import {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLList,
+} from 'graphql'
 import { wordType } from '../word/types'
 
 /** Character 名言 型情報 */

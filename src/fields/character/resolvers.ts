@@ -17,8 +17,7 @@ export const getCharacterList = (args: Partial<SearchCondition>) => {
   if (args.name) {
     characters = characters.filter(
       (v) =>
-        partialMatch(v.name, args.name!) ||
-        partialMatch(v.name_en, args.name!)
+        partialMatch(v.name, args.name!) || partialMatch(v.name_en, args.name!)
     )
   }
   return characters
