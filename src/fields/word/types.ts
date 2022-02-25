@@ -1,8 +1,4 @@
-import {
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLString,
-} from 'graphql'
+import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from 'graphql'
 
 /** Word 名言 型情報 */
 export const wordType = new GraphQLObjectType({
