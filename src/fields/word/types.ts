@@ -17,7 +17,7 @@ export const wordType = new GraphQLObjectType({
     },
     // スタンド名
     stand: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'stand',
     },
     // 第何部
