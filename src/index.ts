@@ -4,13 +4,19 @@ import { GraphQLSchema } from 'graphql'
 import { queryType } from './fields'
 import bodyParser from 'body-parser'
 
+/** Express App */
 const app = express()
-app.get('/', (req, res) => {
-    return res.send('ジョジョの奇妙な冒険 名言API')
-})
 
+// Middleware
 app.use(bodyParser.text({ type: 'application/graphql' }))
 app.use(bodyParser.json())
+
+// REST API's Endpoints
+app.get('/', (req, res) => {
+  return res.send('ジョジョの奇妙な冒険 名言API')
+})
+
+// GraphQL's Endpoints
 const schema = new GraphQLSchema({
   query: queryType,
 })
@@ -22,20 +28,7 @@ app.use(
   })
 )
 
-const log = (req: any, res: any, next: any) => {
-  const json = {
-    date: new Date(),
-    method: req.method,
-    path: req.path,
-    ip: req.ip,
-    proxyIP: req.ips,
-    userAgent: req.headers['user-agent'],
-  }
-  console.log(json)
-  next()
-}
-app.use(log)
-
+// Run Server
 const port = process.env.PORT || 4000
 app.listen(port, () =>
   console.log(`Express GraphQL Server Now Running On localhost:${port}/graphql`)
