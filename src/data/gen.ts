@@ -14,14 +14,29 @@ type ParamsJson = {
   stand: string | null
 }
 
-/** WordデータJSON 型 */
-type WordJson = {
+/** Wordデータ 型 */
+type Word = {
   message: string
   part: string
   speaker: string
   speaker_en: string
   stand: string | null
-}[]
+}
+
+/** WordデータJSON 型 */
+type WordJson = Word[]
+
+/** Characterデータ 型 */
+type Character = {
+  name: string // 名前
+  name_en: string // 名前（英語）
+  stand: string | null // スタンド名
+  wordCount: number // 登録ワード数
+  words: WordJson // 登録ワード
+}
+
+/** CharacterデータJSON 型 */
+type CharacterJson = Character[]
 
 /** ルート ディレクトリ */
 const rootDir = './src/data'
@@ -34,7 +49,8 @@ const folders = dirents
   .filter((v) => v.indexOf('_') !== 0)
 
 /** 出力データ */
-const output: WordJson = []
+const wordOutputJson: WordJson = []
+const characterOutputJson: CharacterJson = []
 
 folders.forEach((folder) => {
   const files = readdirSync(`${rootDir}/${folder}`)
@@ -55,11 +71,22 @@ folders.forEach((folder) => {
         ...params,
       }))
 
+      /** キャラクターデータ */
+      const character: Character = {
+        name: params.speaker,
+        name_en: params.speaker_en,
+        stand: params.stand,
+        wordCount: words.length,
+        words,
+      }
+
       // 出力データに追加
       words.forEach((word) => {
-        output.push(word)
+        wordOutputJson.push(word)
       })
+      characterOutputJson.push(character)
     })
 })
 
-writeFileSync(`${rootDir}/word.json`, JSON.stringify(output))
+writeFileSync(`${rootDir}/word.json`, JSON.stringify(wordOutputJson))
+writeFileSync(`${rootDir}/character.json`, JSON.stringify(characterOutputJson))
