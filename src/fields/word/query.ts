@@ -6,8 +6,8 @@ import {
   ThunkObjMap,
   GraphQLArgumentConfig,
 } from 'graphql'
-import { SearchCondition, getMaximList, getRandomMaxim } from './resolvers'
-import { maximType } from './types'
+import { SearchCondition, getWordList, getRandomWord } from './resolvers'
+import { wordType } from './types'
 
 /** 引数型 */
 type Arg = SearchCondition
@@ -20,20 +20,20 @@ const args: { [key in keyof Arg]: GraphQLArgumentConfig } = {
   max: { type: GraphQLInt }, // 最大文字数
 }
 
-/** Maxim 名言 クエリ */
-export const maximQuery: ThunkObjMap<GraphQLFieldConfig<any, any>> = {
+/** Word 名言 クエリ */
+export const wordQuery: ThunkObjMap<GraphQLFieldConfig<any, any>> = {
   // 名言リストを返す
-  maximList: {
-    type: new GraphQLList(maximType),
+  wordList: {
+    type: new GraphQLList(wordType),
     args,
-    description: 'Get list of maxims data.',
-    resolve: (value, args: Partial<SearchCondition>) => getMaximList(args),
+    description: 'Get list of words data.',
+    resolve: (value, args: Partial<SearchCondition>) => getWordList(args),
   },
   // 名言の中からランダムに返す
-  randomMaxim: {
-    type: maximType,
+  randomWord: {
+    type: wordType,
     args,
-    description: 'Get random maxim data.',
-    resolve: (value, args: Partial<SearchCondition>) => getRandomMaxim(args),
+    description: 'Get random word data.',
+    resolve: (value, args: Partial<SearchCondition>) => getRandomWord(args),
   },
 }

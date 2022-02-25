@@ -5,10 +5,10 @@ import {
   GraphQLInt,
 } from 'graphql'
 
-/** Maxim 名言 型情報 */
-export const maximType = new GraphQLObjectType({
-  name: 'maxim',
-  description: "Jojo's Maxim",
+/** Word 名言 型情報 */
+export const wordType = new GraphQLObjectType({
+  name: 'word',
+  description: "Jojo's Word",
   fields: {
     // 話し手
     speaker: {
