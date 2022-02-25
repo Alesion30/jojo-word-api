@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import { readdirSync, writeFileSync } from 'fs'
 
 /** メッセージJSON 型 */
@@ -31,11 +33,7 @@ const output: WordJson = []
 
 folders.forEach((folder) => {
   const files = readdirSync(`${rootDir}/${folder}`)
-  console.log(files)
-
   const params: ParamsJson = require(`./${folder}/_params.json`)
-  console.log(params)
-
   files
     .filter((v) => v !== '_params.json')
     .forEach((file) => {
@@ -46,9 +44,7 @@ folders.forEach((folder) => {
       const part = file.replace('.json', '')
 
       /** 変換後のデータ */
-      const words: WordJson = json.map((v) => {
-        return { message: v.message, part, ...params }
-      })
+      const words: WordJson = json.map((v) => ({ message: v.message, part, ...params }))
 
       // 出力データに追加
       words.forEach((word) => {
