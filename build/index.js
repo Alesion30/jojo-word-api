@@ -8,12 +8,16 @@ const express_graphql_1 = require("express-graphql");
 const graphql_1 = require("graphql");
 const fields_1 = require("./fields");
 const body_parser_1 = __importDefault(require("body-parser"));
+/** Express App */
 const app = (0, express_1.default)();
+// Middleware
+app.use(body_parser_1.default.text({ type: 'application/graphql' }));
+app.use(body_parser_1.default.json());
+// REST API's Endpoints
 app.get('/', (req, res) => {
     return res.send('ジョジョの奇妙な冒険 名言API');
 });
-app.use(body_parser_1.default.text({ type: 'application/graphql' }));
-app.use(body_parser_1.default.json());
+// GraphQL's Endpoints
 const schema = new graphql_1.GraphQLSchema({
     query: fields_1.queryType,
 });
@@ -21,18 +25,6 @@ app.use('/graphql', (0, express_graphql_1.graphqlHTTP)({
     schema: schema,
     graphiql: true,
 }));
-const log = (req, res, next) => {
-    const json = {
-        date: new Date(),
-        method: req.method,
-        path: req.path,
-        ip: req.ip,
-        proxyIP: req.ips,
-        userAgent: req.headers['user-agent'],
-    };
-    console.log(json);
-    next();
-};
-app.use(log);
+// Run Server
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Express GraphQL Server Now Running On localhost:${port}/graphql`));
