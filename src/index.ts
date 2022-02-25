@@ -1,8 +1,8 @@
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import { GraphQLSchema } from 'graphql'
-import { queryType } from './fields'
 import bodyParser from 'body-parser'
+import { queryType } from './fields'
 
 /** Express App */
 const app = express()
@@ -12,9 +12,7 @@ app.use(bodyParser.text({ type: 'application/graphql' }))
 app.use(bodyParser.json())
 
 // REST API's Endpoints
-app.get('/', (req, res) => {
-  return res.send('ジョジョの奇妙な冒険 名言API')
-})
+app.get('/', (req, res) => res.send('ジョジョの奇妙な冒険 名言API'))
 
 // GraphQL's Endpoints
 const schema = new GraphQLSchema({
@@ -23,7 +21,7 @@ const schema = new GraphQLSchema({
 app.use(
   '/graphql',
   graphqlHTTP({
-    schema: schema,
+    schema,
     graphiql: true,
   })
 )

@@ -2,7 +2,6 @@ import {
   GraphQLObjectType,
   GraphQLNonNull,
   GraphQLString,
-  GraphQLInt,
 } from 'graphql'
 
 /** Word 名言 型情報 */
@@ -15,9 +14,14 @@ export const wordType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'speaker',
     },
+    // 話し手（英語）
+    speaker_en: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'speaker en',
+    },
     // 第何部
     part: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLString),
       description: 'part',
     },
     // メッセージ（原文）

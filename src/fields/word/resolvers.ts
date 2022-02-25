@@ -3,7 +3,7 @@ import { getRandom } from '../../functions/getRandom'
 
 /** 検索条件 */
 export type SearchCondition = {
-  part: number
+  part: string
   speaker: string
   min: number
   max: number
@@ -17,11 +17,11 @@ export const getWordList = (args: Partial<SearchCondition>) => {
   let words = getAllWordList()
   // 部検索
   if (args.part) {
-    words = words.filter((v) => v.part == args.part)
+    words = words.filter((v) => v.part === args.part)
   }
   // 名前検索
   if (args.speaker) {
-    words = words.filter((v) => ~v.speaker.indexOf(args.speaker!))
+    words = words.filter((v) => v.speaker.indexOf(args.speaker!) !== -1)
   }
   // 文字数検索
   if (args.min) {
