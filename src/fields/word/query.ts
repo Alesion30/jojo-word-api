@@ -18,6 +18,7 @@ const args: { [key in keyof Arg]: GraphQLArgumentConfig } = {
   name: { type: GraphQLString }, // 名前
   min: { type: GraphQLInt }, // 最小文字数
   max: { type: GraphQLInt }, // 最大文字数
+  search: { type: GraphQLString }, // 検索ワード
 }
 
 /** Word 名言 クエリ */
